@@ -9,9 +9,10 @@ registerSketch('sk3', function (p) {
   };
 
   p.draw = function () {
-    let hr24 = p.hour();   
+    let hr24 = p.hour();    
     let mn = p.minute();  
-    let sc = p.second();  
+    let sc = p.second(); 
+    let ms = p.millis();  
 
     p.background(0);
 
@@ -19,6 +20,8 @@ registerSketch('sk3', function (p) {
     let heatCol = colorFromTemp(tempF);
 
     let amp = p.map(mn, 0, 59, 2, 25);
+
+    let globalPhase = sc + ms * 0.002;
 
     let bands = 12;
 
@@ -38,12 +41,12 @@ registerSketch('sk3', function (p) {
       p.beginShape();
 
       for (let x = 0; x <= p.width; x += 10) {
-        let waveOffset = p.sin((x * 0.02) + i) * amp;
+        let waveOffset = p.sin((x * 0.02) + globalPhase * 0.5 + i) * amp;
         p.vertex(x, y + waveOffset);
       }
 
       for (let x = p.width; x >= 0; x -= 10) {
-        let waveOffset2 = p.sin((x * 0.02) + i + 10) * amp;
+        let waveOffset2 = p.sin((x * 0.02) + globalPhase * 0.5 + i + 10) * amp;
         p.vertex(x, y + h + waveOffset2);
       }
 
