@@ -4,12 +4,14 @@ registerSketch('sk4', function (p) {
   p.setup = function () {
     p.createCanvas(400, 400);
     p.noStroke();
+    p.angleMode(p.DEGREES);
   };
 
   p.draw = function () {
     p.background(15);
 
     let hr = p.hour();
+    let mn = p.minute();
 
     let r = p.map(hr, 0, 23, 80, 160);
 
@@ -21,15 +23,30 @@ registerSketch('sk4', function (p) {
     p.fill(fillCol);
     p.circle(p.width / 2, p.height / 2, r * 2);
 
+    let sweepDeg = p.map(mn, 0, 59, 0, 360);
+    let ringR = r + 20;
+    let glowCol = p.lerpColor(fillCol, p.color(255, 255, 255), 0.4);
+
+    p.stroke(glowCol);
+    p.strokeWeight(8);
+    p.noFill();
+    p.arc(
+      p.width / 2,
+      p.height / 2,
+      ringR * 2,
+      ringR * 2,
+      -90,
+      -90 + sweepDeg
+    );
+
+    p.noStroke();
     p.fill(255);
     p.textAlign(p.CENTER, p.CENTER);
     p.textSize(16);
-    p.text("Hour: " + hr, p.width / 2, p.height - 20);
+    p.text("Hour: " + hr + "   Minute: " + mn, p.width / 2, p.height - 20);
   };
 
-  p.windowResized = function() {
-  p.resizeCanvas(p.windowWidth, p.windowHeight);
-};
-
+  p.windowResized = function () {
+    p.resizeCanvas(p.windowWidth, p.windowHeight);
+  };
 });
-
