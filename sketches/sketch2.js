@@ -53,24 +53,23 @@ registerSketch('sk2', function (p) {
     }
 
     let topY = cakeBaseY - (numLayers - 1) * cakeHeightPerLayer - cakeHeightPerLayer / 2;
-
-    p.fill(255);
-    p.rect(
+    let domeHeight = cakeHeightPerLayer * 2.5;
+    p.fill(255, 245, 230);
+    p.ellipse(
       cakeCenterX,
       topY,
       cakeWidth,
-      cakeHeightPerLayer + 4,
-      6
+      domeHeight
     );
 
     p.push();
-    p.translate(cakeCenterX, topY); 
+    p.translate(cakeCenterX, topY);
 
     for (let i = 0; i < sc; i++) {
       p.randomSeed(i * 999 + sc);
 
       let sx = p.random(-cakeWidth / 2 + 10, cakeWidth / 2 - 10);
-      let sy = p.random(-cakeHeightPerLayer / 2, cakeHeightPerLayer / 2);
+      let sy = p.random(-domeHeight / 4, domeHeight / 4);
 
       p.fill(
         p.random(100, 255),
@@ -86,7 +85,8 @@ registerSketch('sk2', function (p) {
 
     for (let c = 1; c <= hr12; c++) {
       let cx = cakeCenterX - cakeWidth / 2 + c * candleSpacing;
-      let cy = topY - 20;
+      let cy = topY - domeHeight / 2;
+
 
       p.fill(255, 255, 200);
       p.rect(cx, cy, 6, 20, 2);
