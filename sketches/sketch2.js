@@ -13,7 +13,7 @@ registerSketch('sk2', function (p) {
     let hr24 = p.hour();
     let hr12 = hr24 % 12;
     if (hr12 === 0) { hr12 = 12; }
-    let mn = p.minute();
+    let mn = p.minute(); 
     let sc = p.second();
 
     let cakeCenterX = p.width / 2;
