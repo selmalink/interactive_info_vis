@@ -38,18 +38,18 @@ registerSketch('sk2', function (p) {
       let layerY = cakeBaseY - i * cakeHeightPerLayer;
 
       if (i % 2 === 0) {
-        p.fill(255);
+        p.fill(255,180,180);
       } else {
-        p.fill(200);
+        p.fill(210, 160, 110);
       }
-
       p.rect(
         cakeCenterX,
         layerY,
         cakeWidth,
         cakeHeightPerLayer + 2,
-        4
+        6 
       );
+
     }
 
     let topY = cakeBaseY - (numLayers - 1) * cakeHeightPerLayer - cakeHeightPerLayer / 2;
@@ -87,8 +87,7 @@ registerSketch('sk2', function (p) {
       let cx = cakeCenterX - cakeWidth / 2 + c * candleSpacing;
       let cy = topY - domeHeight / 2;
 
-
-      p.fill(255, 255, 200);
+      p.fill(101, 219, 219);
       p.rect(cx, cy, 6, 20, 2);
 
       let flicker = p.sin(p.millis() / 200 + c) * 2;
